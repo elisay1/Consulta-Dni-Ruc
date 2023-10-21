@@ -16,78 +16,81 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 offset-md-3">
-                <br>
-                <h3>CONSULTA DNI</h3>
-                <br>
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar" id="documento" aria-describedby="button-addon">
-                    <div class="input-group-append mx-3">
-                        <button class="btn btn-outline-primary" type="button" id="buscar">Buscar</button>
+    <form action="" method="post">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 offset-md-3">
+                    <br>
+                    <h3>CONSULTA DNI</h3>
+                    <br>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar" id="documento" aria-describedby="button-addon">
+                        <div class="input-group-append mx-3">
+                            <button class="btn btn-outline-primary" type="button" id="buscar">Buscar</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <br>
-    <!-- Aca se muestra los datos -->
-    <div class="container">
-        <div class="center">
-            <div class="col-md-4 offset-md-3">
-                <div class="form-group mx-auto">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text mt-1 mx-1"><i class="fas fa-id-card"></i></span>
+        <br>
+        <!-- Aca se muestra los datos -->
+        <div class="container">
+            <div class="center">
+                <div class="col-md-4 offset-md-3">
+                    <div class="form-group mx-auto">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text mt-1 mx-1"><i class="fas fa-id-card"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="dni" name="dni" placeholder="DNI">
                         </div>
-                        <input type="text" class="form-control" id="dni" name="dni" placeholder="DNI">
                     </div>
-                </div>
-                <br>
-
-                <div class="form-group mx-auto">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text mt-1 mx-1"><i class="fas fa-user"></i></span>
+                    <br>
+    
+                    <div class="form-group mx-auto">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text mt-1 mx-1"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="nombre"  name="nombre"  placeholder="Nombre">
                         </div>
-                        <input type="text" class="form-control" id="nombre"  name="nombre"  placeholder="Nombre">
                     </div>
-                </div>
-                <br>
-
-                <div class="form-group mx-auto">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text mt-1 mx-1"><i class="fas fa-user"></i></span>
+                    <br>
+    
+                    <div class="form-group mx-auto">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text mt-1 mx-1"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="apellidopaterno" name="apellidoPaterno" placeholder="Apellido paterno">
                         </div>
-                        <input type="text" class="form-control" id="apellidopaterno" name="apellidopaterno" placeholder="Apellido paterno">
                     </div>
-                </div>
-                <br>
-
-                <div class="form-group mx-auto">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text mt-1 mx-1"><i class="fas fa-user"></i></span>
+                    <br>
+    
+                    <div class="form-group mx-auto">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text mt-1 mx-1"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="apellidomaterno" name="apellidoMaterno" placeholder="Apellido materno">
                         </div>
-                        <input type="text" class="form-control" id="apellidomaterno" name="apellidomaterno" placeholder="Apellido materno">
                     </div>
+    
                 </div>
-
             </div>
         </div>
-    </div>
-
-
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <a href="ruc.php" class="btn btn-primary mt-4">Consulta RUC</a>
+    
+    
+    
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <a href="ruc.php" class="btn btn-primary mt-4">Consulta RUC</a>
+                </div>
             </div>
         </div>
-    </div>
+
+    </form>
 
 
 
@@ -98,7 +101,7 @@
 </body>
 
 <script>
-    $('#buscar').click(function() { //traemos al dar click en buscar con jquery #buscar
+    $('#buscar1').click(function() { //traemos al dar click en buscar con jquery #buscar
         //para saber que nos esta mandando el buscar hacemos de la siguiete manera
         //data=$('#documento').val();
         //console.log(data);
@@ -123,26 +126,39 @@
 </script>
 
 <script>
-    $(document).ready(function() {
-        // Escucha los cambios en los campos del formulario
-        $("#formulario input").on("input", function() {
-            // Obtén los datos del formulario
-            var formData = $("#formulario").serialize();
+    $('#buscar').click(function() {
+        dni = $('#documento').val();
+        $.ajax({
+            url: 'controller/consultaDNI.php',
+            type: 'post',
+            data: 'dni=' + dni,
+            dataType: 'json',
+            success: function(r) {
+                if (r.numeroDocumento == dni) {
+                    $('#dni').val(r.numeroDocumento);
+                    $('#nombre').val(r.nombres);
+                    $('#apellidopaterno').val(r.apellidoPaterno);
+                    $('#apellidomaterno').val(r.apellidoMaterno);
 
-            // Envía los datos al servidor
-            guardarDatos(formData);
-        });
-
-        function guardarDatos(formData) {
-            $.ajax({
-                type: "POST",
-                url: "procesar.php",
-                data: formData,
-                success: function(response) {
-                    console.log("Datos guardados automáticamente.");
+                    // Ahora, guardemos los datos en el servidor
+                    $.ajax({
+                        url: 'guardarDatos.php',
+                        type: 'post',
+                        data: {
+                            dni: r.numeroDocumento,
+                            nombre: r.nombres,
+                            apellidoPaterno: r.apellidoPaterno,
+                            apellidoMaterno: r.apellidoMaterno
+                        },
+                        success: function(response) {
+                            alert(response); // Muestra un mensaje con la respuesta del servidor
+                        }
+                    });
+                } else {
+                    alert(r.error);
                 }
-            });
-        }
+            }
+        });
     });
 </script>
 
